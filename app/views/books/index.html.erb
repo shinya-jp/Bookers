@@ -1,0 +1,53 @@
+<h1>Books</h1>
+
+<table>
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Body</th>
+		</tr>
+	</thead>
+
+
+ <tbody>
+ 	 <% @books.each do |book| %>
+	  <tr>
+		<td><%= book.title %></td>
+		<td><%= book.body %></td>
+		<td><%= link_to 'Show', book %></td>
+		<td><%= link_to 'Edit', edit_book_path(book) %></td>
+		<td><%= link_to 'Destroy', book,method: :delete, "data-confirm"=> "Are you sure?" %></td>
+	  </tr>
+	<% end %>
+ </tbody>
+</table>
+
+<!--新規投稿  -->
+
+<h2>New Book</h2>
+  <%= form_for(@book) do |f| %>
+  <% if @book.errors.any? %>
+   <div class="alert_alert-warning">
+     <h4><%= @book.errors.count %>errors prohibited this book from being saved:</h4>
+     <ul>
+      <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+     </ul>
+     </div>
+	<% end %>
+ 	 <div class="field">
+ 		<%= f.label :Title %>
+ 		<%= f.text_field :title %>
+ 	 </div>
+
+ 	 <div class="field">
+ 		<%= f.label :Body %>
+ 		<%= f.text_area :body %>
+ 	</div>
+
+
+ 	<div class="action">
+ 		<%= f.submit %>
+ 	</div>
+ <% end %>
